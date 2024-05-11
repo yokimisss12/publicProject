@@ -1,0 +1,41 @@
+.pic_viewer_container {
+    .pic_action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .pic_viewer {
+            width: 100%;
+            height: calc(100vh - 210px);
+            position: relative;
+            margin: 10px auto;
+            overflow: hidden;
+
+            .img_wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                left: 50px;
+                top: 50px;
+                transform: matrix(1, 0, 0, 1, 0, 0);
+
+                .pic_viewer_img {
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+
+
+    .action_btns {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+
+        .ant-btn {
+            margin-right: 10px;
+        }
+    }
+}
