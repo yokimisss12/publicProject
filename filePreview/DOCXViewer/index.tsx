@@ -7,13 +7,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as docx from 'docx-preview';
 import { Button, Spin } from "antd";
-import { DOCXViewer } from "modules/drugCompanies/diseaseCourseManage/patientList/index.interface";
-import "./index.scss";
-import { DirectionEnum } from "modules/drugCompanies/diseaseCourseManage/patientList/index.enum";
 import { LeftOutlined, RedoOutlined, RightOutlined, ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons";
+import "./index.scss";
 
-const Index: React.FC<DOCXViewer> = (props: DOCXViewer) => {
-    const { url, imgIndex, imgList, fileChangeCallback, connectCallback, associationCount } = props;
+export interface DOCXViewerProps {
+    url: '', // 文件路径
+    imgIndex: number, // 文件下标
+    imgList: [], // 文件列表
+  }
+const Index: React.FC<DOCXViewerProps> = (props: DOCXViewerProps) => {
+    const { url, imgIndex, imgList} = props;
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const docxContainerRef = useRef<HTMLDivElement | null>(null);
     const docxScaleRef = useRef<any>(); // 缩放容器
@@ -42,14 +45,14 @@ const Index: React.FC<DOCXViewer> = (props: DOCXViewer) => {
 
     // 上一个
     const handlePrev = () => {
-        fileChangeCallback && fileChangeCallback(DirectionEnum.PREV);
-        resetFile();
+        console.log('上一个');
+        
     };
 
     // 下一个
     const handelNext = () => {
-        fileChangeCallback && fileChangeCallback(DirectionEnum.NEXT);
-        resetFile();
+       console.log('下一个');
+       
     };
 
     // 缩小
@@ -90,11 +93,7 @@ const Index: React.FC<DOCXViewer> = (props: DOCXViewer) => {
             </div>
             <Button onClick={() => handelNext()} disabled={imgIndex + 1 === imgList?.length} icon={<RightOutlined />} size='small'></Button>
             <div className="scale_tools">
-                <div>{associationCount}</div>
                 <div>
-                    {connectCallback && <Button size='small' className='tool_btn' onClick={() => connectCallback()}>
-                        关联
-                    </Button>}
                     <ZoomInOutlined className='tool_btn' onClick={pageZoomIn} />
                     <ZoomOutOutlined className='tool_btn' onClick={pageZoomOut} />
                     <RedoOutlined className='tool_btn' onClick={resetFile} />

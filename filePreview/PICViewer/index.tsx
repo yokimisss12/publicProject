@@ -6,20 +6,20 @@
  *  url: '', // 图片路径
  * imgIndex?: number, // 图片下标
  * isSwitch?: boolean, // 是否切换图片
- * connectCallback?: () => void, // 关联事件
- * ocrCallback?: () => void, // 识别事件
  */
 import { LeftOutlined, RedoOutlined, RightOutlined, RotateRightOutlined, ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { DirectionEnum } from "modules/drugCompanies/diseaseCourseManage/patientList/index.enum";
-import { PICViewer } from "modules/drugCompanies/diseaseCourseManage/patientList/index.interface";
 import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import "./index.scss";
-
-const Index: React.FC<PICViewer> = (props: PICViewer) => {
-    const { url, imgIndex, imgList, isSwitch, fileChangeCallback, connectCallback, ocrCallback, associationCount } = props;
-    const { ocrFilesDatas } = useSelector((state: any) => state.patientArchivesReducer);
+interface PICViewerTypes {
+    url: '', // 图片路径
+    imgIndex: number, // 图片下标
+    isSwitch?: boolean, // 是否切换图片
+    imgList: [], // 图片列表
+  }
+  
+const Index: React.FC<PICViewerTypes> = (props: PICViewerTypes) => {
+    const { url, imgIndex, imgList, isSwitch } = props;
     const imgRef = useRef<any>();
     const oBox = useRef<any>();
     const imgDom = useRef<any>();
@@ -109,14 +109,13 @@ const Index: React.FC<PICViewer> = (props: PICViewer) => {
 
     // 上一个
     const handlePrev = () => {
-        resetImage();
-        fileChangeCallback && fileChangeCallback(DirectionEnum.PREV);
+        console.log('切换上一个');
+
     };
 
     // 下一个
     const handelNext = () => {
-        resetImage();
-        fileChangeCallback && fileChangeCallback(DirectionEnum.NEXT);
+        console.log('切换下一个');
     };
 
     return (
@@ -136,20 +135,11 @@ const Index: React.FC<PICViewer> = (props: PICViewer) => {
                 <Button onClick={() => handelNext()} disabled={imgIndex + 1 === imgList?.length} icon={<RightOutlined />} size='small'></Button>
             </div>
             <div className="action_btns">
-                <div>{associationCount}</div>
                 <div>
                     <Button onClick={handleRotate} icon={<RotateRightOutlined />} size='small'></Button>
                     <Button onClick={() => zoom({ deltaY: -0.9 })} icon={<ZoomInOutlined />} size='small'></Button>
                     <Button onClick={() => zoom({ deltaY: 0.9 })} icon={<ZoomOutOutlined />} size='small'></Button>
                     <Button onClick={() => resetImage()} icon={<RedoOutlined />} size='small'></Button>
-                    {ocrCallback && ocrFilesDatas.isOcrTemplate && <>
-                        <Button size='small' onClick={() => ocrCallback()}>
-                            OCR识别
-                        </Button>
-                    </>}
-                    {connectCallback && <Button size='small' onClick={() => connectCallback()}>
-                        关联
-                    </Button>}
                 </div>
             </div>
         </div>

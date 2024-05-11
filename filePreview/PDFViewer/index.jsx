@@ -16,7 +16,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import './index.scss';
 const PageCom = (props) => {
-  const { imgIndex, isSwitch, imgList, fileChangeCallback, connectCallback, associationCount } = props;
+  const { imgIndex, isSwitch, imgList, fileChangeCallback } = props;
   const [filePath, setFilePath] = useState(null);
   const baseWidth = 800;
   const maxWidth = 1100;
@@ -120,7 +120,6 @@ const PageCom = (props) => {
     <div className='pdfViewer_container'>
       <Button onClick={() => handlePrev()} disabled={imgIndex === 0} icon={<LeftOutlined />} size='small'></Button>
       {loadSuccess && <div className="pageTool">
-        <div>{associationCount}</div>
         <div>
           <Tooltip title={pageCurrent === 1 ? "已是第一页" : "上一页"}>
             <LeftOutlined className='tool_btn' onClick={prevPage} />
@@ -133,9 +132,6 @@ const PageCom = (props) => {
           <ZoomInOutlined className='tool_btn' onClick={pageZoomIn} />
           <ZoomOutOutlined className='tool_btn' onClick={pageZoomOut} />
           <RedoOutlined className='tool_btn' onClick={resetFile} />
-          {connectCallback && <Button className='tool_btn' size='small' onClick={() => connectCallback()}>
-            关联
-          </Button>}
         </div>
       </div>}
       <div className="pdfViewer_wrapper">
