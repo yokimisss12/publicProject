@@ -1,0 +1,9 @@
+{
+    "name": "yoki-app",
+    "version": "1.0.0",
+    "scripts": {
+        "myscript": "node ./scripts/index.js",
+        "sayscript": "node ./scripts/say.js",
+        "export": "node ./scripts/autoExport.mjs"
+    }
+}
