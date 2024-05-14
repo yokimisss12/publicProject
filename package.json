@@ -1,9 +1,27 @@
 {
-    "name": "yoki-app",
-    "version": "1.0.0",
-    "scripts": {
-        "myscript": "node ./scripts/index.js",
-        "sayscript": "node ./scripts/say.js",
-        "export": "node ./scripts/autoExport.mjs"
-    }
+  "name": "publicproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./app.js",
+    "myscript": "node ./scripts/index.js",
+    "sayscript": "node ./scripts/say.js",
+    "export": "node ./scripts/autoExport.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yokimisss12/publicProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yokimisss12/publicProject/issues"
+  },
+  "homepage": "https://github.com/yokimisss12/publicProject#readme"
 }
